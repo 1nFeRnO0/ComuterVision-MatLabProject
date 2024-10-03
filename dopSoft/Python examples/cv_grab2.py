@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 import mvsdk
 import platform
+from ultralytics import YOLO
 
 class Camera(object):
 	def __init__(self, DevInfo):
@@ -103,17 +104,27 @@ def main_loop():
 		print("{}: {} {}".format(i, DevInfo.GetFriendlyName(), DevInfo.GetPortType()))
 
 	cams = []
-	for i in map(lambda x: int(x), raw_input("Select cameras: ").split()):
+	for i in map(lambda x: int(x), input("Select cameras: ").split()):
 		cam = Camera(DevList[i])
 		if cam.open():
 			cams.append(cam)
 
+	# Создаем модель Yolo
+	model = YOLO("yolov5s.pt")
+	# model = YOLO("yolov8n-seg.pt")
+
 	while (cv2.waitKey(1) & 0xFF) != ord('q'):
 		for cam in cams:
 			frame = cam.grab()
+			
 			if frame is not None:
+				print(type(frame))
 				frame = cv2.resize(frame, (640,480), interpolation = cv2.INTER_LINEAR)
-				cv2.imshow("{} Press q to end".format(cam.DevInfo.GetFriendlyName()), frame)
+
+				# Обрабатываем фрейм с помощью Yolo
+				results = model.predict(frame, device='gpu')
+
+				cv2.imshow("{} Press q to end".format(cam.DevInfo.GetFriendlyName()), results[0].plot())
 
 	for cam in cams:
 		cam.close()
