@@ -1,7 +1,9 @@
 *.mp4
 *.avi
 *.rar
+*.lnk
 cropped
 videos
-*.lnk
+models
 Pretrained-YOLOv8-Network-For-Object-Detection
+__pycache__
