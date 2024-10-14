@@ -8,7 +8,7 @@ videoReader = VideoReader(videoFile);
 
 % Создание объекта для записи выходного видео
 outputVideo = VideoWriter('output_video.mp4', 'MPEG-4');
-outputVideo.FrameRate = videoReader.FrameRate;
+outputVideo.FrameRate =i videoReader.FrameRate;
 open(outputVideo);
 
 % Создание объекта для детектирования объектов

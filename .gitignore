@@ -3,4 +3,5 @@
 *.rar
 cropped
 videos
-*.pt
+*.lnk
+Pretrained-YOLOv8-Network-For-Object-Detection
