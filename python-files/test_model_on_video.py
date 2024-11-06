@@ -4,32 +4,9 @@ import numpy as np
 import torch
 import time
 
+model = YOLO('models/best_yolo11n_bolts_nuts.pt')
+vid_capture = cv2.VideoCapture('C:/Users/rusla/Desktop/ComuterVision-MatLabProject/videos/capture_line_of_things1.avi')
 
-# model = YOLO("y8m_best.pt")
-# model = YOLO("C:/Users/rusla/Desktop/cv-tg-bot/runs/detect/train9/weights/best.pt")
-# results = model("bus.jpg")
-# results[0].show()
-# results = model("object.png")
-# results[0].show()
-# results = model("only_screw_dataset/train/images/IMG_1303_JPG_jpg.rf.5f6e3bfc47deb07e5db6a71a93bcca0c.jpg")
-# results[0].show()
-
-model = YOLO('yolo11_screws.pt')
-vid_capture = cv2.VideoCapture('./videos/capture_line_of_things.avi')
-
-# if (vid_capture.isOpened() == False):
-#     print("Ошибка открытия видеофайла")
-# # Чтение fps и количества кадров
-# else:
-#     # Получить информацию о частоте кадров
-#     # Можно заменить 5 на CAP_PROP_FPS, это перечисления
-#     fps = vid_capture.get(5)
-#     print('Фреймов в секунду: ', fps,'FPS')
-#     # Получить количество кадров
-#     # Можно заменить 7 на CAP_PROP_FRAME_COUNT, это перечисления
-#     frame_count = vid_capture.get(7)
-#     print('Частота кадров: ', frame_count)
-#     print('\n-----------------------------\nДля завершения нажмите "q" или Esc...')
 file_count = 0
 
 skip_count = 0
@@ -46,10 +23,10 @@ while(vid_capture.isOpened()):
 	if ret and skip_count == 0:
 		results = model.predict(frame, device='0')
 		prob = results[0].boxes.conf
-		if (len(prob) == 0) or (prob[0].item() < prob_limit):
-			skip_count = 15
-			continue
-		results[0].save(filename='photos/output.png')
+		# if (len(prob) == 0) or (prob[0].item() < prob_limit):
+		# 	skip_count = 15
+		# 	continue
+		# results[0].save(filename='photos/output.png')
 		results_np = results[0].plot()
 
 
