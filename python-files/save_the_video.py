@@ -1,10 +1,9 @@
 from WorkWithCamera import *
 
-filename = 'video_for_tests.mp4'
-codec='VP90'
-fps=60
+filename = 'video_for_tests_bolts1.mp4'
+fps=60.0
 resolution=(640, 640)
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+fourcc = cv2.VideoWriter_fourcc(*'XVID') 
 
 def main():
 	cams = create_camera()
@@ -16,7 +15,7 @@ def main():
 			cv2.imshow('frame', frame)
 			if (cv2.waitKey(1) & 0xFF) == ord('q'):
 				break
-		out.release()
+	out.release()	
 
 
 
