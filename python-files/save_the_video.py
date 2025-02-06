@@ -1,6 +1,6 @@
 from WorkWithCamera import *
 
-filename = 'video_for_tests_bolts1.mp4'
+filename = 'video_for_tests_bolts_and_nuts1.mp4v'
 fps=60.0
 resolution=(640, 640)
 fourcc = cv2.VideoWriter_fourcc(*'XVID') 
