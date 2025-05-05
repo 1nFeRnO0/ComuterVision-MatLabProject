@@ -1,0 +1,13 @@
+Log file created at: 2025/04/28 14:57:07
+Running on machine: raspberrypi
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0428 14:57:07.192442  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:1
+W0428 14:57:08.193109  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:2
+W0428 14:57:09.197453  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:3
+W0428 14:57:10.201840  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:4
+W0428 14:57:11.206069  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:5
+W0428 14:57:52.408169  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:1
+W0428 14:57:53.412511  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:2
+W0428 14:57:54.416826  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:3
+W0428 14:57:55.421129  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:4
+W0428 14:57:56.425498  5307 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.81-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:5
