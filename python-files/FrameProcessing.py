@@ -4,7 +4,7 @@ from ultralytics import YOLO
 from ultralytics.engine.results import Results
 
 def analyze_frame(frame: np.ndarray, model: YOLO) -> Results:
-	results = model.predict(frame, device='cpu')
+	results = model.predict(frame, device='0')
 	return results[0]
 
 def check_prob_limit(result: Results, prob_limit: float) -> bool:

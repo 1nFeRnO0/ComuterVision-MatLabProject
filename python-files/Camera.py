@@ -1,9 +1,7 @@
 #coding=utf-8
-import cv2
 import numpy as np
 import mvsdk
 import platform
-from ultralytics import YOLO
 
 class Camera(object):
 	def __init__(self, DevInfo):
@@ -35,7 +33,7 @@ class Camera(object):
 		if monoCamera:
 			mvsdk.CameraSetIspOutFormat(hCamera, mvsdk.CAMERA_MEDIA_TYPE_MONO8)
 		else:
-			mvsdk.CameraSetIspOutFormat(hCamera, mvsdk.CAMERA_MEDIA_TYPE_BGR8)
+			mvsdk.CameraSetIspOutFormat(hCamera, mvsdk.CAMERA_MEDIA_TYPE_BAYGR16)
 
 		# 计算RGB buffer所需的大小，这里直接按照相机的最大分辨率来分配
 		FrameBufferSize = cap.sResolutionRange.iWidthMax * cap.sResolutionRange.iHeightMax * (1 if monoCamera else 3)
@@ -49,7 +47,7 @@ class Camera(object):
 
 		# 手动曝光，曝光时间30ms
 		mvsdk.CameraSetAeState(hCamera, 0)
-		mvsdk.CameraSetExposureTime(hCamera, 30 * 1000)
+		mvsdk.CameraSetExposureTime(hCamera, 10 * 1000)
 
 		# 让SDK内部取图线程开始工作
 		mvsdk.CameraPlay(hCamera)

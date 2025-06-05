@@ -1,102 +1,55 @@
 from WorkWithCamera import *
 from FrameProcessing import *
 from ultralytics import YOLO
+from angle_calc import angle_calc
 import cv2
-import gpiod
-from threading import Thread
-from gpiod.line import Direction, Value
-from time import sleep, time
-from work_with_com_port.client import check_cls
-
-start = time()
-
-SENSOR = 27
-LED = 5
-chip_name = '/dev/gpiochip0'
-DELAY = 0.075
-
-def send_signal():
-    with gpiod.request_lines(
-                chip_name,
-                consumer='led-test',
-                config={
-                        LED: gpiod.LineSettings(
-                                direction=Direction.OUTPUT, output_value=Value.ACTIVE
-                            ),
-                    }
-                ) as request:
-        while True:
-            request.set_value(LED, Value.ACTIVE)
-#            sleep(DELAY)
-#            request.set_value(LED, Value.INACTIVE)
-#            sleep(DELAY)
-        else:
-            request.set_value(LED, Value.INACTIVE)
-            
-def get_signal():
-    with gpiod.request_lines(
-                chip_name,
-                consumer='sensor-test',
-                config={
-                        SENSOR: gpiod.LineSettings(
-                                direction=Direction.INPUT
-                            ),
-                    }
-                ) as request:
-#        while True:
-        sleep(DELAY/100)
-        val = request.get_value(SENSOR)
-        return 1 if val == Value.INACTIVE else 0
+# from work_with_com_port.client import check_cls
+from timeit import timeit
 
 def main_loop():
-    # Создаем модель Yolo
-    model = YOLO('../models/antons_model11n_200_nut.pt')
+	# Создаем модель Yolo
+	model = YOLO('best_yolo11n_bolts_nuts.pt')
 
-    # Переменные счетчика пропуска фреймов и ограничения вероятности
-    skip_count = 0
-    prob_limit = 0.8
-    cams = create_camera()
-    sig0 = 0
-    sig1 = 0
+	# Переменные счетчика пропуска фреймов и ограничения вероятности
+	skip_count = 0
+	prob_limit = 0.85
+	cams = create_camera()
 
-    while (cv2.waitKey(1) & 0xFF) != ord('q'):
-        for cam in cams:
-#            for sig1 in get_signal()
-            sig1 = get_signal()
-            if sig1 == 1 and sig0 == 0:
-                print('Found 10')
-                frame = get_frames(cam)
-                if frame is not None: #and skip_count == 0:
-                    results = analyze_frame(frame, model)
-#                    if check_prob_limit(results, prob_limit):
-#                        skip_count = 15
-#                        continue
-                    
-                    #print(results.boxes.cls)
-                    if results.boxes.cls != tensor([]):
-                        cls = results.boxes.cls[0].item()
-                        check_cls(cls)
-                    
+	while (cv2.waitKey(1) & 0xFF) != ord('q'):
+		for cam in cams:
+			frame = get_frames(cam)
+			if frame is not None:
+				if skip_count == 0:
+					results = analyze_frame(frame, model)
+					# tensor = results.boxes.conf
+					if check_prob_limit(results, prob_limit):
+					# 	skip_count = 15
+					# 	continue
+					# if len(tensor) != 0:
+					# 	cls = results.boxes.cls[0].item()
+						# check_cls(cls)
+					# def check_rotate_time():
+					ang, ang_result, ang_thresh = angle_calc(frame)
 
-                    cv2.imshow("{} Press q to end".format(cam.DevInfo.GetFriendlyName()), results.plot())
-#                else:
-#                    skip_count -= 1
-#                    if frame is None:
-#                            break
-            sig0 = sig1
-    for cam in cams:
-        cam.close()
+					cv2.imshow("{} YOLO Press q to end".format(cam.DevInfo.GetFriendlyName()), results.plot())
+					cv2.imshow("{} Angle Press q to end".format(cam.DevInfo.GetFriendlyName()), ang_result) # Вывод онлайн изображения
+					cv2.imshow("thresh Press q to end", ang_thresh)
+					print(ang)
+					# print(timeit(stmt='check_rotate_time()', globals=locals(), number=1))
+				else:
+					skip_count -= 1
+			else:
+				break
+	for cam in cams:
+		cam.close()
+
+
 
 def main():
-    try:
-        send = Thread(target=send_signal)
-        get = Thread(target=main_loop)
-        get.start()
-        send.start()
-        get.join()
-        send.join()
-    finally:
-        cv2.destroyAllWindows()
+	try:
+		main_loop()
+	finally:
+		cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+	main()
