@@ -1,0 +1,3 @@
+/home/raspberry/computer-vision/python-files/work_with_com_port/pyservo_pwm_module/build/CMakeFiles/pyservo.dir
+/home/raspberry/computer-vision/python-files/work_with_com_port/pyservo_pwm_module/build/CMakeFiles/edit_cache.dir
+/home/raspberry/computer-vision/python-files/work_with_com_port/pyservo_pwm_module/build/CMakeFiles/rebuild_cache.dir

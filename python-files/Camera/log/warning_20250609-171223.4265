@@ -1,0 +1,7 @@
+Log file created at: 2025/06/09 17:12:23
+Running on machine: raspberrypi
+Log line format: [IWEF]mmdd hh:mm:ss.uuuuuu threadid file:line] msg
+W0609 17:12:23.867043  4290 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.197-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:1
+W0609 17:12:24.873838  4290 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.197-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:2
+W0609 17:12:25.877218  4290 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.197-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:3
+W0609 17:12:26.878856  4290 CameraGigeBase.cpp:3914] Device:(name:MS-GE134GC-T1P-C sn:054020323006 cam:192.168.2.197-1000-1300 nic:-192.168.2.151-Unknown-0)Heart Fail:4
