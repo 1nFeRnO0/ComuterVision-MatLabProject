@@ -7,7 +7,6 @@ from time import sleep, time
 #from work_with_com_port.client import check_cls
 from constant_lines import *
 from IRProcessing import *
-from IRProcessing import *
 from ServoTurning import turning
 from constant_lines import MODEL_PATH
 
@@ -24,10 +23,6 @@ def check_cls(cls: float):
 def main_loop():
     # Создаем модель Yolo
     model = YOLO(MODEL_PATH)
-
-    # Переменные счетчика пропуска фреймов и ограничения вероятности
-    skip_count = 0
-    prob_limit = 0.8
     cams = create_camera()
     signal_previous = 0
     signal_current = 0
@@ -39,24 +34,15 @@ def main_loop():
             if signal_current == 0 and signal_previous == 1:
                 print('Found falling edge')
                 frame = get_frames(cam)
-                if frame is not None: #and skip_count == 0:
+                if frame is not None:
                     results = analyze_frame(frame, model)
-#                    if check_prob_limit(results, prob_limit):
-#                        skip_count = 15
-#                        continue
                     
                     if len(results.boxes.cls):
                         cls = results.boxes.cls[0].item()
                         print(cls)
                         check_cls(cls)
-                    
-
                     print('Showing results')
                     cv2.imshow("{} Press q to end".format(cam.DevInfo.GetFriendlyName()), results.plot())
-#                else:
-#                    skip_count -= 1
-#                    if frame is None:
-#                            break
             signal_previous = signal_current
     for cam in cams:
         cam.close()

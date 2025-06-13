@@ -42,6 +42,6 @@ def turning(angle):
             line.set_value(SERVO_LINE, Value.INACTIVE)
             time.sleep(off_time)   # Остаток 20ms периода
     except Exception as e:
-        print('пиздец, не крутится:', e)
+        print('Серво не крутится:', e)
 
 

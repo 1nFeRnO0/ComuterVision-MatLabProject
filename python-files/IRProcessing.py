@@ -12,16 +12,9 @@ def send_signal():
                                 direction=Direction.OUTPUT, output_value=Value.ACTIVE
                             ),
                     }
-                ) #as request:
+                )
     line.set_value(LED_LINE, Value.ACTIVE)
     return line
-#         while True:
-#             request.set_value(LED_LINE, Value.ACTIVE)
-# #            sleep(DELAY)
-# #            request.set_value(LED_LINE, Value.INACTIVE)
-# #            sleep(DELAY)
-#         else:
-#             request.set_value(LED_LINE, Value.INACTIVE)
             
 def get_signal():
     with gpiod.request_lines(
@@ -33,7 +26,6 @@ def get_signal():
                             ),
                     }
                 ) as request:
-#        while True:
         sleep(RECIEVER_DELAY)
         val = request.get_value(RECIEVER_LINE)
         return 1 if val == Value.ACTIVE else 0
